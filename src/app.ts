@@ -1,4 +1,5 @@
 
+import { envs } from "./config"
 import { Server } from "./presentation/server"
 
 //Function anonima autoinvocada
@@ -10,7 +11,7 @@ import { Server } from "./presentation/server"
 
 
 async function main() {
-    
-    new Server({port: 3000}).start()
+
+    new Server({port: envs.PORT}).start()
 
 }
