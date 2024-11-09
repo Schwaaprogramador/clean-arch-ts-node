@@ -2,7 +2,7 @@
 // en un futuro cuando se necesite cambiar de dependencia el proyecto no esta acoplado a esta.
 // Evitar depender de paquetes de terceros
 import express, { Router } from "express"
-
+import morgan from 'morgan'
 
 interface Options {
     port?:number;
@@ -32,7 +32,13 @@ export class Server {
 
     //dependencia oculta => poner el processs.env directamente ne el codigo
     async start(){
-        this.app.use(this.routes)
+
+        this.app.use( express.json() );
+        this.app.use( express.urlencoded( {extended:true} ));
+        this.app.use( morgan('dev') );
+
+        this.app.use( this.routes );
+
         this.app.listen( this.port , ()=>{
             console.log(`puerto ${this.port}`)
         })
